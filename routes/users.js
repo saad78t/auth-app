@@ -113,7 +113,7 @@ router.post('/reset/:token', (req, res) => {
 
         let mailOptions = {
           to: user.email,
-          from: 'Saad Turky saad.turky2000@gmail.com',
+          from: 'Saad Turky saad@gmail.com',
           subject: 'Your password is changed',
           text:
             'Hello, ' +
@@ -213,7 +213,7 @@ router.post('/forgot', (req, res, next) => {
         });
         let mailOptions = {
           to: user.email,
-          from: 'Saad Turky saad.turky2000@gmail.com',
+          from: 'Saad Turky saad@gmail.com',
           subject: 'Recovery email from auth project',
           text:
             'Please click the following link to recover the password: \n\n' +
