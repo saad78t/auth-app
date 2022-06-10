@@ -55,14 +55,14 @@ router.get('/reset/:token', (req, res) => {
   })
     .then((user) => {
       if (!user) {
-        req.flash('error_msg', 'Password reset token is invalid or expired');
+        req.flash('error_msg', '💥💥Password reset token is invalid or expired💥💥');
         return res.redirect('/forgot');
       }
       res.render('newpassword', { token: req.params.token });
     })
     .catch((err) => {
       req.flash('error_msg', 'ERROR: ' + err);
-      res.redirect('/forgot');
+      // res.redirect('/forgot');
     });
 });
 
@@ -80,9 +80,8 @@ router.post('/reset/:token', (req, res) => {
               req.flash('error_msg', 'Password reset token is invalid or expired');
               res.redirect('/forgot');
             }
-            // res.render('newpassword', { token: req.params.token });
             if (req.body.password !== req.body.confirmpassword) {
-              req.flash('error', 'Passwords dont match');
+              req.flash('error', '💥💥💥PASSWORDS DONT MATCH 💥💥💥');
               return res.redirect('/forgot');
             }
 
@@ -99,7 +98,7 @@ router.post('/reset/:token', (req, res) => {
           })
           .catch((err) => {
             req.flash('error_msg', 'ERROR: ' + err);
-            res.redirect('/forgot');
+            // res.redirect('/forgot');
           });
       },
       (user) => {
@@ -110,7 +109,6 @@ router.post('/reset/:token', (req, res) => {
             pass: process.env.GMAIL_PASSWORD,
           },
         });
-
         let mailOptions = {
           to: user.email,
           from: 'Saad Turky saad@gmail.com',
@@ -205,12 +203,14 @@ router.post('/forgot', (req, res, next) => {
       (token, user) => {
         //SMTP is a simple mail transfer protocol
         let smtpTransport = nodemailer.createTransport({
-          service: 'Gmail',
+          host: 'smtp.mailtrap.io',
+          port: 2525,
           auth: {
             user: process.env.GMAIL_EMAIL,
             pass: process.env.GMAIL_PASSWORD,
           },
         });
+
         let mailOptions = {
           to: user.email,
           from: 'Saad Turky saad@gmail.com',
